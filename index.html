@@ -14,12 +14,12 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 40px 20px;
+            padding: 20px 10px;
             min-height: 100vh;
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             background: white;
             border-radius: 20px;
@@ -30,55 +30,63 @@
         .header {
             background: linear-gradient(135deg, #6b21a8 0%, #4c1d95 100%);
             color: white;
-            padding: 40px;
+            padding: 30px 20px;
             text-align: center;
         }
 
         .header h1 {
-            font-size: 36px;
+            font-size: clamp(24px, 5vw, 36px);
             margin-bottom: 10px;
             font-weight: 700;
+            word-wrap: break-word;
         }
 
         .header p {
-            font-size: 16px;
+            font-size: clamp(14px, 2.5vw, 16px);
             opacity: 0.9;
         }
 
         .header .spring-logo {
-            font-size: 48px;
+            font-size: clamp(36px, 8vw, 48px);
             margin-bottom: 15px;
         }
 
         .content {
-            padding: 40px;
+            padding: 30px 20px;
         }
 
         .section {
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
 
         .section-title {
-            font-size: 24px;
+            font-size: clamp(18px, 3.5vw, 24px);
             color: #4c1d95;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             padding-bottom: 10px;
             border-bottom: 3px solid #e9d5ff;
             display: flex;
             align-items: center;
             gap: 10px;
+            flex-wrap: wrap;
         }
 
         .section-title .icon {
-            font-size: 28px;
+            font-size: clamp(22px, 5vw, 28px);
+        }
+
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
         }
 
         table {
             width: 100%;
+            min-width: 600px;
             border-collapse: collapse;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            overflow: hidden;
         }
 
         thead {
@@ -87,17 +95,18 @@
         }
 
         th {
-            padding: 15px;
+            padding: 12px 15px;
             text-align: left;
-            font-size: 14px;
+            font-size: clamp(11px, 1.8vw, 14px);
             text-transform: uppercase;
             letter-spacing: 1px;
+            white-space: nowrap;
         }
 
         td {
-            padding: 15px;
+            padding: 12px 15px;
             border-bottom: 1px solid #e5e7eb;
-            font-size: 14px;
+            font-size: clamp(12px, 1.8vw, 14px);
             line-height: 1.6;
         }
 
@@ -113,19 +122,22 @@
             font-family: 'Courier New', monospace;
             background-color: #f3e8ff;
             color: #6b21a8;
-            padding: 4px 10px;
+            padding: 4px 8px;
             border-radius: 5px;
             font-weight: 600;
-            font-size: 13px;
+            font-size: clamp(11px, 1.6vw, 13px);
+            white-space: nowrap;
+            display: inline-block;
         }
 
         .badge {
             display: inline-block;
-            padding: 4px 12px;
+            padding: 4px 10px;
             border-radius: 20px;
-            font-size: 12px;
+            font-size: clamp(10px, 1.4vw, 12px);
             font-weight: 600;
             letter-spacing: 0.5px;
+            white-space: nowrap;
         }
 
         .badge-core {
@@ -159,6 +171,7 @@
         .info-box h3 {
             color: #4c1d95;
             margin-bottom: 10px;
+            font-size: clamp(16px, 2.5vw, 20px);
         }
 
         .info-box ul {
@@ -169,6 +182,7 @@
         .info-box li {
             padding: 5px 0;
             color: #4b5563;
+            font-size: clamp(12px, 1.8vw, 14px);
         }
 
         .info-box li:before {
@@ -183,7 +197,7 @@
             padding: 20px;
             text-align: center;
             color: #6b7280;
-            font-size: 13px;
+            font-size: clamp(11px, 1.6vw, 13px);
             border-top: 1px solid #e5e7eb;
         }
 
@@ -191,24 +205,29 @@
             background: white;
             border: 2px solid #e9d5ff;
             border-radius: 10px;
-            padding: 30px;
+            padding: 20px 15px;
             margin-bottom: 30px;
             text-align: center;
+        }
+
+        .diagram h3 {
+            font-size: clamp(16px, 2.5vw, 20px);
         }
 
         .diagram-flow {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 20px;
+            gap: 10px;
             flex-wrap: wrap;
         }
 
         .diagram-box {
-            padding: 15px 20px;
+            padding: 10px 15px;
             border-radius: 10px;
             font-weight: 600;
-            font-size: 14px;
+            font-size: clamp(11px, 1.6vw, 14px);
+            white-space: nowrap;
         }
 
         .box-container {
@@ -227,19 +246,126 @@
         }
 
         .arrow {
-            font-size: 24px;
+            font-size: clamp(18px, 3vw, 24px);
             color: #7c3aed;
         }
 
+        /* Mobile Responsive Styles */
+        @media screen and (max-width: 768px) {
+            body {
+                padding: 10px 5px;
+            }
+
+            .container {
+                border-radius: 15px;
+            }
+
+            .header {
+                padding: 20px 15px;
+            }
+
+            .content {
+                padding: 20px 15px;
+            }
+
+            .section {
+                margin-bottom: 25px;
+            }
+
+            .diagram-flow {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .arrow {
+                transform: rotate(90deg);
+            }
+
+            .diagram-box {
+                width: 100%;
+                max-width: 250px;
+            }
+
+            th, td {
+                padding: 10px 12px;
+            }
+
+            .table-wrapper {
+                border-radius: 8px;
+            }
+
+            /* Stack table on very small screens */
+            @media screen and (max-width: 480px) {
+                table {
+                    min-width: 450px;
+                }
+
+                .annotation-name {
+                    font-size: 11px;
+                    padding: 3px 6px;
+                }
+
+                .badge {
+                    font-size: 10px;
+                    padding: 3px 8px;
+                }
+
+                td {
+                    font-size: 11px;
+                }
+            }
+        }
+
+        @media screen and (min-width: 769px) and (max-width: 1024px) {
+            .container {
+                max-width: 95%;
+            }
+
+            .content {
+                padding: 30px 25px;
+            }
+        }
+
+        @media screen and (min-width: 1025px) {
+            .container {
+                max-width: 1200px;
+            }
+
+            .content {
+                padding: 40px;
+            }
+        }
+
+        /* Print styles */
         @media print {
             body {
                 background: white;
                 padding: 0;
             }
+
             .container {
                 box-shadow: none;
                 border-radius: 0;
+                max-width: 100%;
             }
+
+            .table-wrapper {
+                overflow-x: visible;
+            }
+
+            table {
+                min-width: 100%;
+            }
+
+            @page {
+                margin: 1cm;
+            }
+        }
+
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            /* Optional: Add dark mode styles if needed */
+            /* Currently keeping light theme for PDF compatibility */
         }
     </style>
 </head>
@@ -271,47 +397,49 @@
                 <h2 class="section-title">
                     <span class="icon">🏷️</span> Stereotype Annotations
                 </h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Annotation</th>
-                            <th>Purpose</th>
-                            <th>Usage</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><span class="annotation-name">@Component</span></td>
-                            <td>Generic stereotype for any Spring-managed bean</td>
-                            <td><span class="badge badge-core">Core</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="annotation-name">@Service</span></td>
-                            <td>Marks service layer beans containing business logic</td>
-                            <td><span class="badge badge-service">Service Layer</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="annotation-name">@Repository</span></td>
-                            <td>Marks DAO/repository beans; adds automatic exception translation</td>
-                            <td><span class="badge badge-core">Data Layer</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="annotation-name">@Controller</span></td>
-                            <td>Marks Spring MVC controller beans</td>
-                            <td><span class="badge badge-service">Web Layer</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="annotation-name">@RestController</span></td>
-                            <td>Combines @Controller and @ResponseBody for REST APIs</td>
-                            <td><span class="badge badge-service">REST API</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="annotation-name">@Configuration</span></td>
-                            <td>Defines configuration classes with @Bean methods</td>
-                            <td><span class="badge badge-config">Configuration</span></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Annotation</th>
+                                <th>Purpose</th>
+                                <th>Usage</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="annotation-name">@Component</span></td>
+                                <td>Generic stereotype for any Spring-managed bean</td>
+                                <td><span class="badge badge-core">Core</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="annotation-name">@Service</span></td>
+                                <td>Marks service layer beans containing business logic</td>
+                                <td><span class="badge badge-service">Service Layer</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="annotation-name">@Repository</span></td>
+                                <td>Marks DAO/repository beans; adds automatic exception translation</td>
+                                <td><span class="badge badge-core">Data Layer</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="annotation-name">@Controller</span></td>
+                                <td>Marks Spring MVC controller beans</td>
+                                <td><span class="badge badge-service">Web Layer</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="annotation-name">@RestController</span></td>
+                                <td>Combines @Controller and @ResponseBody for REST APIs</td>
+                                <td><span class="badge badge-service">REST API</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="annotation-name">@Configuration</span></td>
+                                <td>Defines configuration classes with @Bean methods</td>
+                                <td><span class="badge badge-config">Configuration</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <!-- Injection Annotations -->
@@ -319,47 +447,49 @@
                 <h2 class="section-title">
                     <span class="icon">💉</span> Injection Annotations
                 </h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Annotation</th>
-                            <th>Purpose</th>
-                            <th>Usage</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><span class="annotation-name">@Autowired</span></td>
-                            <td>Injects dependencies automatically by type; optional with single constructor</td>
-                            <td><span class="badge badge-injection">Injection</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="annotation-name">@Qualifier</span></td>
-                            <td>Specifies which bean to inject when multiple beans of same type exist</td>
-                            <td><span class="badge badge-injection">Injection</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="annotation-name">@Primary</span></td>
-                            <td>Marks a bean as the default choice when multiple beans exist</td>
-                            <td><span class="badge badge-injection">Injection</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="annotation-name">@Value</span></td>
-                            <td>Injects property values from application.properties or application.yml</td>
-                            <td><span class="badge badge-config">Configuration</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="annotation-name">@Resource</span></td>
-                            <td>JSR-250 annotation; injects by name (not Spring-specific)</td>
-                            <td><span class="badge badge-injection">Injection</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="annotation-name">@Inject</span></td>
-                            <td>JSR-330 annotation; similar to @Autowired (not Spring-specific)</td>
-                            <td><span class="badge badge-injection">Injection</span></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Annotation</th>
+                                <th>Purpose</th>
+                                <th>Usage</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="annotation-name">@Autowired</span></td>
+                                <td>Injects dependencies automatically by type; optional with single constructor</td>
+                                <td><span class="badge badge-injection">Injection</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="annotation-name">@Qualifier</span></td>
+                                <td>Specifies which bean to inject when multiple beans of same type exist</td>
+                                <td><span class="badge badge-injection">Injection</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="annotation-name">@Primary</span></td>
+                                <td>Marks a bean as the default choice when multiple beans exist</td>
+                                <td><span class="badge badge-injection">Injection</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="annotation-name">@Value</span></td>
+                                <td>Injects property values from application.properties or application.yml</td>
+                                <td><span class="badge badge-config">Configuration</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="annotation-name">@Resource</span></td>
+                                <td>JSR-250 annotation; injects by name (not Spring-specific)</td>
+                                <td><span class="badge badge-injection">Injection</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="annotation-name">@Inject</span></td>
+                                <td>JSR-330 annotation; similar to @Autowired (not Spring-specific)</td>
+                                <td><span class="badge badge-injection">Injection</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <!-- Bean Definition Annotations -->
@@ -367,57 +497,59 @@
                 <h2 class="section-title">
                     <span class="icon">🔧</span> Bean Definition & Lifecycle Annotations
                 </h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Annotation</th>
-                            <th>Purpose</th>
-                            <th>Usage</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><span class="annotation-name">@Bean</span></td>
-                            <td>Explicitly declares a Spring bean in @Configuration class</td>
-                            <td><span class="badge badge-config">Configuration</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="annotation-name">@Scope</span></td>
-                            <td>Defines bean scope: singleton, prototype, request, session, etc.</td>
-                            <td><span class="badge badge-config">Lifecycle</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="annotation-name">@Lazy</span></td>
-                            <td>Delays bean initialization until first request</td>
-                            <td><span class="badge badge-config">Lifecycle</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="annotation-name">@PostConstruct</span></td>
-                            <td>Marks method to execute after dependency injection is complete</td>
-                            <td><span class="badge badge-config">Lifecycle</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="annotation-name">@PreDestroy</span></td>
-                            <td>Marks method to execute before bean is destroyed</td>
-                            <td><span class="badge badge-config">Lifecycle</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="annotation-name">@DependsOn</span></td>
-                            <td>Forces specific beans to be initialized before this bean</td>
-                            <td><span class="badge badge-config">Lifecycle</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="annotation-name">@Profile</span></td>
-                            <td>Activates bean only when specific profile(s) are active</td>
-                            <td><span class="badge badge-config">Configuration</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="annotation-name">@Conditional</span></td>
-                            <td>Creates bean only when specific conditions are met</td>
-                            <td><span class="badge badge-config">Conditional</span></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Annotation</th>
+                                <th>Purpose</th>
+                                <th>Usage</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="annotation-name">@Bean</span></td>
+                                <td>Explicitly declares a Spring bean in @Configuration class</td>
+                                <td><span class="badge badge-config">Configuration</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="annotation-name">@Scope</span></td>
+                                <td>Defines bean scope: singleton, prototype, request, session, etc.</td>
+                                <td><span class="badge badge-config">Lifecycle</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="annotation-name">@Lazy</span></td>
+                                <td>Delays bean initialization until first request</td>
+                                <td><span class="badge badge-config">Lifecycle</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="annotation-name">@PostConstruct</span></td>
+                                <td>Marks method to execute after dependency injection is complete</td>
+                                <td><span class="badge badge-config">Lifecycle</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="annotation-name">@PreDestroy</span></td>
+                                <td>Marks method to execute before bean is destroyed</td>
+                                <td><span class="badge badge-config">Lifecycle</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="annotation-name">@DependsOn</span></td>
+                                <td>Forces specific beans to be initialized before this bean</td>
+                                <td><span class="badge badge-config">Lifecycle</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="annotation-name">@Profile</span></td>
+                                <td>Activates bean only when specific profile(s) are active</td>
+                                <td><span class="badge badge-config">Configuration</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="annotation-name">@Conditional</span></td>
+                                <td>Creates bean only when specific conditions are met</td>
+                                <td><span class="badge badge-config">Conditional</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <!-- Bean Scopes Section -->
@@ -425,40 +557,42 @@
                 <h2 class="section-title">
                     <span class="icon">🌐</span> Bean Scopes (@Scope Values)
                 </h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Scope</th>
-                            <th>Description</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><span class="annotation-name">singleton</span></td>
-                            <td><strong>Default scope.</strong> Single instance per Spring IoC container</td>
-                        </tr>
-                        <tr>
-                            <td><span class="annotation-name">prototype</span></td>
-                            <td>New instance each time the bean is requested</td>
-                        </tr>
-                        <tr>
-                            <td><span class="annotation-name">request</span></td>
-                            <td>Single instance per HTTP request (WebApplicationContext only)</td>
-                        </tr>
-                        <tr>
-                            <td><span class="annotation-name">session</span></td>
-                            <td>Single instance per HTTP session (WebApplicationContext only)</td>
-                        </tr>
-                        <tr>
-                            <td><span class="annotation-name">application</span></td>
-                            <td>Single instance per ServletContext lifecycle</td>
-                        </tr>
-                        <tr>
-                            <td><span class="annotation-name">websocket</span></td>
-                            <td>Single instance per WebSocket lifecycle</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Scope</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="annotation-name">singleton</span></td>
+                                <td><strong>Default scope.</strong> Single instance per Spring IoC container</td>
+                            </tr>
+                            <tr>
+                                <td><span class="annotation-name">prototype</span></td>
+                                <td>New instance each time the bean is requested</td>
+                            </tr>
+                            <tr>
+                                <td><span class="annotation-name">request</span></td>
+                                <td>Single instance per HTTP request (WebApplicationContext only)</td>
+                            </tr>
+                            <tr>
+                                <td><span class="annotation-name">session</span></td>
+                                <td>Single instance per HTTP session (WebApplicationContext only)</td>
+                            </tr>
+                            <tr>
+                                <td><span class="annotation-name">application</span></td>
+                                <td>Single instance per ServletContext lifecycle</td>
+                            </tr>
+                            <tr>
+                                <td><span class="annotation-name">websocket</span></td>
+                                <td>Single instance per WebSocket lifecycle</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <!-- Best Practices Info Box -->
