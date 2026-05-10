@@ -1,619 +1,234 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spring DI Annotations Summary</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 20px 10px;
-            min-height: 100vh;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            overflow: hidden;
-        }
-
-        .header {
-            background: linear-gradient(135deg, #6b21a8 0%, #4c1d95 100%);
-            color: white;
-            padding: 30px 20px;
-            text-align: center;
-        }
-
-        .header h1 {
-            font-size: clamp(24px, 5vw, 36px);
-            margin-bottom: 10px;
-            font-weight: 700;
-            word-wrap: break-word;
-        }
-
-        .header p {
-            font-size: clamp(14px, 2.5vw, 16px);
-            opacity: 0.9;
-        }
-
-        .header .spring-logo {
-            font-size: clamp(36px, 8vw, 48px);
-            margin-bottom: 15px;
-        }
-
-        .content {
-            padding: 30px 20px;
-        }
-
-        .section {
-            margin-bottom: 30px;
-        }
-
-        .section-title {
-            font-size: clamp(18px, 3.5vw, 24px);
-            color: #4c1d95;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 3px solid #e9d5ff;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .section-title .icon {
-            font-size: clamp(22px, 5vw, 28px);
-        }
-
-        .table-wrapper {
-            width: 100%;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-        }
-
-        table {
-            width: 100%;
-            min-width: 600px;
-            border-collapse: collapse;
-        }
-
-        thead {
-            background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
-            color: white;
-        }
-
-        th {
-            padding: 12px 15px;
-            text-align: left;
-            font-size: clamp(11px, 1.8vw, 14px);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            white-space: nowrap;
-        }
-
-        td {
-            padding: 12px 15px;
-            border-bottom: 1px solid #e5e7eb;
-            font-size: clamp(12px, 1.8vw, 14px);
-            line-height: 1.6;
-        }
-
-        tbody tr:hover {
-            background-color: #faf5ff;
-        }
-
-        tbody tr:last-child td {
-            border-bottom: none;
-        }
-
-        .annotation-name {
-            font-family: 'Courier New', monospace;
-            background-color: #f3e8ff;
-            color: #6b21a8;
-            padding: 4px 8px;
-            border-radius: 5px;
-            font-weight: 600;
-            font-size: clamp(11px, 1.6vw, 13px);
-            white-space: nowrap;
-            display: inline-block;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: clamp(10px, 1.4vw, 12px);
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            white-space: nowrap;
-        }
-
-        .badge-core {
-            background-color: #dbeafe;
-            color: #1e40af;
-        }
-
-        .badge-service {
-            background-color: #d1fae5;
-            color: #065f46;
-        }
-
-        .badge-config {
-            background-color: #fef3c7;
-            color: #92400e;
-        }
-
-        .badge-injection {
-            background-color: #fce7f3;
-            color: #9d174d;
-        }
-
-        .info-box {
-            background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
-            border-left: 4px solid #7c3aed;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 30px;
-        }
-
-        .info-box h3 {
-            color: #4c1d95;
-            margin-bottom: 10px;
-            font-size: clamp(16px, 2.5vw, 20px);
-        }
-
-        .info-box ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .info-box li {
-            padding: 5px 0;
-            color: #4b5563;
-            font-size: clamp(12px, 1.8vw, 14px);
-        }
-
-        .info-box li:before {
-            content: "✓";
-            color: #7c3aed;
-            font-weight: bold;
-            margin-right: 10px;
-        }
-
-        .footer {
-            background: #f8fafc;
-            padding: 20px;
-            text-align: center;
-            color: #6b7280;
-            font-size: clamp(11px, 1.6vw, 13px);
-            border-top: 1px solid #e5e7eb;
-        }
-
-        .diagram {
-            background: white;
-            border: 2px solid #e9d5ff;
-            border-radius: 10px;
-            padding: 20px 15px;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        .diagram h3 {
-            font-size: clamp(16px, 2.5vw, 20px);
-        }
-
-        .diagram-flow {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .diagram-box {
-            padding: 10px 15px;
-            border-radius: 10px;
-            font-weight: 600;
-            font-size: clamp(11px, 1.6vw, 14px);
-            white-space: nowrap;
-        }
-
-        .box-container {
-            background: #dbeafe;
-            color: #1e40af;
-        }
-
-        .box-component {
-            background: #d1fae5;
-            color: #065f46;
-        }
-
-        .box-bean {
-            background: #fef3c7;
-            color: #92400e;
-        }
-
-        .arrow {
-            font-size: clamp(18px, 3vw, 24px);
-            color: #7c3aed;
-        }
-
-        /* Mobile Responsive Styles */
-        @media screen and (max-width: 768px) {
-            body {
-                padding: 10px 5px;
-            }
-
-            .container {
-                border-radius: 15px;
-            }
-
-            .header {
-                padding: 20px 15px;
-            }
-
-            .content {
-                padding: 20px 15px;
-            }
-
-            .section {
-                margin-bottom: 25px;
-            }
-
-            .diagram-flow {
-                flex-direction: column;
-                gap: 5px;
-            }
-
-            .arrow {
-                transform: rotate(90deg);
-            }
-
-            .diagram-box {
-                width: 100%;
-                max-width: 250px;
-            }
-
-            th, td {
-                padding: 10px 12px;
-            }
-
-            .table-wrapper {
-                border-radius: 8px;
-            }
-
-            /* Stack table on very small screens */
-            @media screen and (max-width: 480px) {
-                table {
-                    min-width: 450px;
-                }
-
-                .annotation-name {
-                    font-size: 11px;
-                    padding: 3px 6px;
-                }
-
-                .badge {
-                    font-size: 10px;
-                    padding: 3px 8px;
-                }
-
-                td {
-                    font-size: 11px;
-                }
-            }
-        }
-
-        @media screen and (min-width: 769px) and (max-width: 1024px) {
-            .container {
-                max-width: 95%;
-            }
-
-            .content {
-                padding: 30px 25px;
-            }
-        }
-
-        @media screen and (min-width: 1025px) {
-            .container {
-                max-width: 1200px;
-            }
-
-            .content {
-                padding: 40px;
-            }
-        }
-
-        /* Print styles */
-        @media print {
-            body {
-                background: white;
-                padding: 0;
-            }
-
-            .container {
-                box-shadow: none;
-                border-radius: 0;
-                max-width: 100%;
-            }
-
-            .table-wrapper {
-                overflow-x: visible;
-            }
-
-            table {
-                min-width: 100%;
-            }
-
-            @page {
-                margin: 1cm;
-            }
-        }
-
-        /* Dark mode support */
-        @media (prefers-color-scheme: dark) {
-            /* Optional: Add dark mode styles if needed */
-            /* Currently keeping light theme for PDF compatibility */
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spring Boot Developer Roadmap</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <div class="container">
-        <div class="header">
-            <div class="spring-logo">🍃</div>
-            <h1>Spring Dependency Injection</h1>
-            <p>Key Annotations Reference Guide</p>
+<body class="bg-slate-100 text-slate-800">
+  <div class="max-w-6xl mx-auto px-6 py-10">
+    <!-- Header -->
+    <header class="text-center mb-10">
+      <h1 class="text-5xl font-bold text-green-700 mb-4">Spring Boot Developer Roadmap</h1>
+      <p class="text-lg text-slate-600 max-w-3xl mx-auto">
+        A complete roadmap to become a professional Java and Spring Boot backend developer.
+        Follow these steps, build projects, and become job-ready.
+      </p>
+    </header>
+
+    <!-- Timeline -->
+    <section class="bg-white rounded-3xl shadow-lg p-8 mb-10">
+      <h2 class="text-3xl font-bold mb-6">Estimated Learning Timeline</h2>
+      <div class="grid md:grid-cols-4 gap-4">
+        <div class="bg-blue-50 p-4 rounded-2xl">
+          <h3 class="font-semibold text-blue-700">Month 1-2</h3>
+          <p>Core Java + OOP</p>
         </div>
-
-        <div class="content">
-            <!-- Flow Diagram -->
-            <div class="diagram">
-                <h3 style="color: #4c1d95; margin-bottom: 20px;">Spring Bean Lifecycle Flow</h3>
-                <div class="diagram-flow">
-                    <div class="diagram-box box-container">IoC Container</div>
-                    <span class="arrow">→</span>
-                    <div class="diagram-box box-component">@Component Scan</div>
-                    <span class="arrow">→</span>
-                    <div class="diagram-box box-bean">Bean Creation</div>
-                    <span class="arrow">→</span>
-                    <div class="diagram-box box-container">Dependency Injection</div>
-                </div>
-            </div>
-
-            <!-- Stereotype Annotations -->
-            <div class="section">
-                <h2 class="section-title">
-                    <span class="icon">🏷️</span> Stereotype Annotations
-                </h2>
-                <div class="table-wrapper">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Annotation</th>
-                                <th>Purpose</th>
-                                <th>Usage</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><span class="annotation-name">@Component</span></td>
-                                <td>Generic stereotype for any Spring-managed bean</td>
-                                <td><span class="badge badge-core">Core</span></td>
-                            </tr>
-                            <tr>
-                                <td><span class="annotation-name">@Service</span></td>
-                                <td>Marks service layer beans containing business logic</td>
-                                <td><span class="badge badge-service">Service Layer</span></td>
-                            </tr>
-                            <tr>
-                                <td><span class="annotation-name">@Repository</span></td>
-                                <td>Marks DAO/repository beans; adds automatic exception translation</td>
-                                <td><span class="badge badge-core">Data Layer</span></td>
-                            </tr>
-                            <tr>
-                                <td><span class="annotation-name">@Controller</span></td>
-                                <td>Marks Spring MVC controller beans</td>
-                                <td><span class="badge badge-service">Web Layer</span></td>
-                            </tr>
-                            <tr>
-                                <td><span class="annotation-name">@RestController</span></td>
-                                <td>Combines @Controller and @ResponseBody for REST APIs</td>
-                                <td><span class="badge badge-service">REST API</span></td>
-                            </tr>
-                            <tr>
-                                <td><span class="annotation-name">@Configuration</span></td>
-                                <td>Defines configuration classes with @Bean methods</td>
-                                <td><span class="badge badge-config">Configuration</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Injection Annotations -->
-            <div class="section">
-                <h2 class="section-title">
-                    <span class="icon">💉</span> Injection Annotations
-                </h2>
-                <div class="table-wrapper">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Annotation</th>
-                                <th>Purpose</th>
-                                <th>Usage</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><span class="annotation-name">@Autowired</span></td>
-                                <td>Injects dependencies automatically by type; optional with single constructor</td>
-                                <td><span class="badge badge-injection">Injection</span></td>
-                            </tr>
-                            <tr>
-                                <td><span class="annotation-name">@Qualifier</span></td>
-                                <td>Specifies which bean to inject when multiple beans of same type exist</td>
-                                <td><span class="badge badge-injection">Injection</span></td>
-                            </tr>
-                            <tr>
-                                <td><span class="annotation-name">@Primary</span></td>
-                                <td>Marks a bean as the default choice when multiple beans exist</td>
-                                <td><span class="badge badge-injection">Injection</span></td>
-                            </tr>
-                            <tr>
-                                <td><span class="annotation-name">@Value</span></td>
-                                <td>Injects property values from application.properties or application.yml</td>
-                                <td><span class="badge badge-config">Configuration</span></td>
-                            </tr>
-                            <tr>
-                                <td><span class="annotation-name">@Resource</span></td>
-                                <td>JSR-250 annotation; injects by name (not Spring-specific)</td>
-                                <td><span class="badge badge-injection">Injection</span></td>
-                            </tr>
-                            <tr>
-                                <td><span class="annotation-name">@Inject</span></td>
-                                <td>JSR-330 annotation; similar to @Autowired (not Spring-specific)</td>
-                                <td><span class="badge badge-injection">Injection</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Bean Definition Annotations -->
-            <div class="section">
-                <h2 class="section-title">
-                    <span class="icon">🔧</span> Bean Definition & Lifecycle Annotations
-                </h2>
-                <div class="table-wrapper">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Annotation</th>
-                                <th>Purpose</th>
-                                <th>Usage</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><span class="annotation-name">@Bean</span></td>
-                                <td>Explicitly declares a Spring bean in @Configuration class</td>
-                                <td><span class="badge badge-config">Configuration</span></td>
-                            </tr>
-                            <tr>
-                                <td><span class="annotation-name">@Scope</span></td>
-                                <td>Defines bean scope: singleton, prototype, request, session, etc.</td>
-                                <td><span class="badge badge-config">Lifecycle</span></td>
-                            </tr>
-                            <tr>
-                                <td><span class="annotation-name">@Lazy</span></td>
-                                <td>Delays bean initialization until first request</td>
-                                <td><span class="badge badge-config">Lifecycle</span></td>
-                            </tr>
-                            <tr>
-                                <td><span class="annotation-name">@PostConstruct</span></td>
-                                <td>Marks method to execute after dependency injection is complete</td>
-                                <td><span class="badge badge-config">Lifecycle</span></td>
-                            </tr>
-                            <tr>
-                                <td><span class="annotation-name">@PreDestroy</span></td>
-                                <td>Marks method to execute before bean is destroyed</td>
-                                <td><span class="badge badge-config">Lifecycle</span></td>
-                            </tr>
-                            <tr>
-                                <td><span class="annotation-name">@DependsOn</span></td>
-                                <td>Forces specific beans to be initialized before this bean</td>
-                                <td><span class="badge badge-config">Lifecycle</span></td>
-                            </tr>
-                            <tr>
-                                <td><span class="annotation-name">@Profile</span></td>
-                                <td>Activates bean only when specific profile(s) are active</td>
-                                <td><span class="badge badge-config">Configuration</span></td>
-                            </tr>
-                            <tr>
-                                <td><span class="annotation-name">@Conditional</span></td>
-                                <td>Creates bean only when specific conditions are met</td>
-                                <td><span class="badge badge-config">Conditional</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Bean Scopes Section -->
-            <div class="section">
-                <h2 class="section-title">
-                    <span class="icon">🌐</span> Bean Scopes (@Scope Values)
-                </h2>
-                <div class="table-wrapper">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Scope</th>
-                                <th>Description</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><span class="annotation-name">singleton</span></td>
-                                <td><strong>Default scope.</strong> Single instance per Spring IoC container</td>
-                            </tr>
-                            <tr>
-                                <td><span class="annotation-name">prototype</span></td>
-                                <td>New instance each time the bean is requested</td>
-                            </tr>
-                            <tr>
-                                <td><span class="annotation-name">request</span></td>
-                                <td>Single instance per HTTP request (WebApplicationContext only)</td>
-                            </tr>
-                            <tr>
-                                <td><span class="annotation-name">session</span></td>
-                                <td>Single instance per HTTP session (WebApplicationContext only)</td>
-                            </tr>
-                            <tr>
-                                <td><span class="annotation-name">application</span></td>
-                                <td>Single instance per ServletContext lifecycle</td>
-                            </tr>
-                            <tr>
-                                <td><span class="annotation-name">websocket</span></td>
-                                <td>Single instance per WebSocket lifecycle</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Best Practices Info Box -->
-            <div class="info-box">
-                <h3>✅ Best Practices for Spring DI</h3>
-                <ul>
-                    <li>Prefer <strong>Constructor Injection</strong> for mandatory dependencies</li>
-                    <li>Use <strong>Setter Injection</strong> only for optional dependencies</li>
-                    <li>Avoid <strong>Field Injection</strong> in production code</li>
-                    <li>Mark dependencies as <strong>final</strong> when using constructor injection</li>
-                    <li>Use <strong>@Qualifier</strong> or <strong>@Primary</strong> to resolve bean conflicts</li>
-                    <li>Keep beans <strong>stateless</strong> for singleton scope</li>
-                    <li>Use <strong>interfaces</strong> for better abstraction and testing</li>
-                </ul>
-            </div>
+        <div class="bg-green-50 p-4 rounded-2xl">
+          <h3 class="font-semibold text-green-700">Month 3-4</h3>
+          <p>Spring Core + Spring Boot</p>
         </div>
-
-        <div class="footer">
-            <p>Spring Framework - Dependency Injection Reference Guide | Generated for Development Reference</p>
-            <p>Copyright by Sothearith 2026</p>
+        <div class="bg-yellow-50 p-4 rounded-2xl">
+          <h3 class="font-semibold text-yellow-700">Month 5-6</h3>
+          <p>JPA, Security, Testing</p>
         </div>
-    </div>
+        <div class="bg-purple-50 p-4 rounded-2xl">
+          <h3 class="font-semibold text-purple-700">Month 7+</h3>
+          <p>Docker, Deployment, Projects</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Roadmap Steps -->
+    <section class="space-y-6">
+
+      <div class="bg-white rounded-3xl shadow p-8">
+        <h2 class="text-2xl font-bold text-indigo-600 mb-4">1. Core Java Fundamentals</h2>
+        <ul class="list-disc pl-6 space-y-1">
+          <li>Variables, Data Types, Operators</li>
+          <li>Control Flow (if, switch, loops)</li>
+          <li>Methods and Recursion</li>
+          <li>Object-Oriented Programming (OOP)</li>
+          <li>Interfaces and Abstract Classes</li>
+          <li>Exception Handling</li>
+          <li>Collections Framework</li>
+          <li>Generics</li>
+          <li>Lambda Expressions</li>
+          <li>Streams API</li>
+        </ul>
+      </div>
+
+      <div class="bg-white rounded-3xl shadow p-8">
+        <h2 class="text-2xl font-bold text-indigo-600 mb-4">2. SQL and Databases</h2>
+        <ul class="list-disc pl-6 space-y-1">
+          <li>SELECT, INSERT, UPDATE, DELETE</li>
+          <li>JOINs and Subqueries</li>
+          <li>Indexes and Constraints</li>
+          <li>Transactions</li>
+          <li>Database Design</li>
+          <li>MySQL, PostgreSQL, or SQL Server</li>
+        </ul>
+      </div>
+
+      <div class="bg-white rounded-3xl shadow p-8">
+        <h2 class="text-2xl font-bold text-indigo-600 mb-4">3. Build Tools and Version Control</h2>
+        <ul class="list-disc pl-6 space-y-1">
+          <li>Maven or Gradle</li>
+          <li>pom.xml</li>
+          <li>Git and GitHub</li>
+          <li>Branching and Pull Requests</li>
+        </ul>
+      </div>
+
+      <div class="bg-white rounded-3xl shadow p-8">
+        <h2 class="text-2xl font-bold text-indigo-600 mb-4">4. Spring Core</h2>
+        <ul class="list-disc pl-6 space-y-1">
+          <li>IoC (Inversion of Control)</li>
+          <li>Dependency Injection (DI)</li>
+          <li>Beans and Bean Scopes</li>
+          <li>@Component, @Service, @Repository</li>
+          <li>@Autowired, @Inject, @Resource</li>
+          <li>@Qualifier and @Primary</li>
+        </ul>
+      </div>
+
+      <div class="bg-white rounded-3xl shadow p-8">
+        <h2 class="text-2xl font-bold text-indigo-600 mb-4">5. Spring Boot</h2>
+        <ul class="list-disc pl-6 space-y-1">
+          <li>@SpringBootApplication</li>
+          <li>Starter Dependencies</li>
+          <li>Auto Configuration</li>
+          <li>application.properties / application.yml</li>
+          <li>Profiles</li>
+          <li>Configuration Properties</li>
+        </ul>
+      </div>
+
+      <div class="bg-white rounded-3xl shadow p-8">
+        <h2 class="text-2xl font-bold text-indigo-600 mb-4">6. REST API Development</h2>
+        <ul class="list-disc pl-6 space-y-1">
+          <li>@RestController</li>
+          <li>@GetMapping, @PostMapping, @PutMapping, @DeleteMapping</li>
+          <li>Path Variables and Request Parameters</li>
+          <li>DTOs</li>
+          <li>Validation with @Valid</li>
+          <li>Global Exception Handling</li>
+        </ul>
+      </div>
+
+      <div class="bg-white rounded-3xl shadow p-8">
+        <h2 class="text-2xl font-bold text-indigo-600 mb-4">7. Spring Data JPA and Hibernate</h2>
+        <ul class="list-disc pl-6 space-y-1">
+          <li>@Entity and @Table</li>
+          <li>Repositories</li>
+          <li>Entity Relationships</li>
+          <li>JPQL and Native Queries</li>
+          <li>Pagination and Sorting</li>
+          <li>Auditing</li>
+        </ul>
+      </div>
+
+      <div class="bg-white rounded-3xl shadow p-8">
+        <h2 class="text-2xl font-bold text-indigo-600 mb-4">8. Spring Security</h2>
+        <ul class="list-disc pl-6 space-y-1">
+          <li>Authentication and Authorization</li>
+          <li>JWT (JSON Web Token)</li>
+          <li>Role-Based Access Control</li>
+          <li>Password Encryption</li>
+          <li>Custom UserDetailsService</li>
+        </ul>
+      </div>
+
+      <div class="bg-white rounded-3xl shadow p-8">
+        <h2 class="text-2xl font-bold text-indigo-600 mb-4">9. Testing</h2>
+        <ul class="list-disc pl-6 space-y-1">
+          <li>JUnit 5</li>
+          <li>Mockito</li>
+          <li>@SpringBootTest</li>
+          <li>Integration Testing</li>
+          <li>API Testing with Postman</li>
+        </ul>
+      </div>
+
+      <div class="bg-white rounded-3xl shadow p-8">
+        <h2 class="text-2xl font-bold text-indigo-600 mb-4">10. API Documentation</h2>
+        <ul class="list-disc pl-6 space-y-1">
+          <li>OpenAPI / Swagger UI</li>
+          <li>Generate Interactive API Docs</li>
+        </ul>
+      </div>
+
+      <div class="bg-white rounded-3xl shadow p-8">
+        <h2 class="text-2xl font-bold text-indigo-600 mb-4">11. Docker and Deployment</h2>
+        <ul class="list-disc pl-6 space-y-1">
+          <li>Dockerfile</li>
+          <li>Docker Compose</li>
+          <li>CI/CD with GitHub Actions</li>
+          <li>Deploy to Render, Railway, or AWS</li>
+        </ul>
+      </div>
+
+      <div class="bg-white rounded-3xl shadow p-8">
+        <h2 class="text-2xl font-bold text-indigo-600 mb-4">12. Microservices (Advanced)</h2>
+        <ul class="list-disc pl-6 space-y-1">
+          <li>Spring Cloud</li>
+          <li>Config Server</li>
+          <li>Eureka Service Discovery</li>
+          <li>API Gateway</li>
+          <li>OpenFeign</li>
+          <li>Resilience4j</li>
+        </ul>
+      </div>
+
+      <div class="bg-white rounded-3xl shadow p-8">
+        <h2 class="text-2xl font-bold text-indigo-600 mb-4">13. Essential Tools</h2>
+        <ul class="list-disc pl-6 space-y-1">
+          <li>IntelliJ IDEA</li>
+          <li>VS Code</li>
+          <li>Postman</li>
+          <li>Docker Desktop</li>
+          <li>Ubuntu Linux</li>
+        </ul>
+      </div>
+
+      <div class="bg-white rounded-3xl shadow p-8">
+        <h2 class="text-2xl font-bold text-indigo-600 mb-4">14. Portfolio Projects</h2>
+        <ol class="list-decimal pl-6 space-y-1">
+          <li>Student Management API</li>
+          <li>E-Commerce Backend</li>
+          <li>Blog API</li>
+          <li>Inventory Management System</li>
+          <li>Authentication Service</li>
+          <li>Microservices Project</li>
+        </ol>
+      </div>
+
+      <div class="bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-3xl shadow p-8">
+        <h2 class="text-3xl font-bold mb-4">Daily Study Plan</h2>
+        <ul class="list-disc pl-6 space-y-1">
+          <li>2 hours studying concepts</li>
+          <li>2 hours coding practice</li>
+          <li>1 coding challenge</li>
+          <li>1 Git commit per day</li>
+          <li>Build one project every month</li>
+        </ul>
+      </div>
+
+      <div class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-3xl shadow p-8">
+        <h2 class="text-3xl font-bold mb-4">Final Goal</h2>
+        <p class="text-lg leading-8">
+          By following this roadmap consistently, you will become a professional Spring Boot Backend Developer
+          capable of building secure, scalable, production-ready REST APIs and enterprise applications.
+        </p>
+      </div>
+
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center mt-12 text-slate-500">
+      <p>Created for your Spring Boot learning journey. Keep building and stay consistent.</p>
+    </footer>
+  </div>
 </body>
 </html>
